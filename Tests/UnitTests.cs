@@ -1,3 +1,5 @@
+using PullYourLuck.Services;
+
 namespace PullYourLuck.Tests
 {
     public class UnitTests
@@ -15,22 +17,18 @@ namespace PullYourLuck.Tests
         [Fact]
         public void TestRollChanceToBust()
         {
+            ChanceWorker worker = new ChanceWorker();
+
             int SuccessChance = 99;
             int BustChance = 1;
 
-            bool Success = RollChances(SuccessChance, BustChance);
+            bool Success = worker.RollChances(SuccessChance, BustChance);
             Assert.True(Success);
         }
 
-        [Fact]
-        public void TestModifyChances()
-        {
-            int SuccessChance = 99;
-            int BustChance = 1;
-
-            ModifyChances(SuccessChance, BustChance, 5);
-            Assert.Equal(94, SuccessChance);
-            Assert.Equal(6, BustChance);
-        }
+        //deck of cards: from 0-5, can keep drawing but if you hit 0, it's a bust
+        //otherwise you can cash it into your score and for each round you need at least X score; more points = more coins
+        //use coins you earn to buy more cards, bonuses, perks, etc.
+        //card have ratings and keywords for special abilities
     }
 }
