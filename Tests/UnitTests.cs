@@ -1,4 +1,5 @@
 using PullYourLuck.Services;
+using PullYourLuck.GameObjects;
 
 namespace PullYourLuck.Tests
 {
@@ -24,6 +25,28 @@ namespace PullYourLuck.Tests
 
             bool Success = worker.RollChances(SuccessChance, BustChance);
             Assert.True(Success);
+        }
+
+        [Fact]
+        public void TestDrawCard()
+        {
+            Deck deck = new Deck();
+            Hand hand = new Hand();
+            Card card1 = new Card(1, "circle");
+            Card card2 = new Card(2, "circle");
+            Card card3 = new Card(3, "circle");
+
+            deck.AddCard(card1);
+            deck.AddCard(card2);
+            deck.AddCard(card3);
+
+            deck.DrawCard();
+
+            int deckCount = deck.GetDeckCount();
+            int handCount = hand.GetHandCount();
+            Assert.Equal(2, deckCount);
+            Assert.Equal(1, handCount);
+
         }
 
         //deck of cards: from 0-5, can keep drawing but if you hit 0, it's a bust
