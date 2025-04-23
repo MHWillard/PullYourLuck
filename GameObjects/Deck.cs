@@ -13,7 +13,11 @@
             this.cards = cardsToAdd;
         }
 
-        public void DrawCard() { }
+        public Card DrawCard() {
+            Card DrawnCard = cards[0];
+            cards.RemoveAt(0);
+            return DrawnCard;
+        }
         public void AddCard(Card card) {
             cards.Add(card);
         }
