@@ -4,13 +4,13 @@ using PullYourLuck.Interfaces;
 
 namespace PullYourLuck.Tests
 {
-    public class UnitTests
+    public class HandTests
     {
         [Fact]
         public void TestDrawCard()
         {
             Deck deck = new Deck();
-            Hand hand = new Hand();
+            GameObjects.Hand hand = new GameObjects.Hand();
             Card card1 = new Card(1, "circle");
             Card card2 = new Card(2, "circle");
             Card card3 = new Card(3, "circle");
@@ -29,30 +29,15 @@ namespace PullYourLuck.Tests
         }
 
         [Fact]
-        public void TestSetupGameBoard()
-        {
-            GameBoard board = new GameBoard();
-            Assert.NotNull(board.deck);
-            Assert.NotNull(board.hand);
-        }
-
-        [Fact]
-        public void TestHandInterface() {
-            GameBoard Game = new GameBoard();
-            Card card1 = new Card(1, "circle");
-            Game.AddCardToDeck(card1);
-            Game.DrawCard();
-            int HandCount = Game.hand.GetHandCount();
-            Assert.Equal(1, HandCount);
-        }
-
-        [Fact]
         public void TestPlayCardFromHand() {
             GameBoard Game = new GameBoard();
             Card card1 = new Card(1, "circle");
-            Game.AddCardToHand(card1);
-            Game.SelectCardInHand(card1);
-            Game.PlaySelectedCards();
+            Game.hand.AddCard(card1);
+            Game.hand.SelectCardInHand(card1);
+            Game.PlaySelectedCard();
+
+            Assert.Contains(Game.playedCards, item => item._value== 1);
+                //Assert.Contains(myList, item => item.Id == 1 && item.Name == "John");
         }
 
         //deck of cards: from 0-5, can keep drawing but if you hit 0, it's a bust

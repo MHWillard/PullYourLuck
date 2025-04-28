@@ -1,4 +1,5 @@
-﻿using PullYourLuck.Interfaces;
+﻿using PullYourLuck.Controllers;
+using PullYourLuck.Interfaces;
 
 namespace PullYourLuck.GameObjects
 {
@@ -6,45 +7,36 @@ namespace PullYourLuck.GameObjects
     {
         public Hand hand;
         public Deck deck;
-        public HandInterface handInt;
-        public List<Card> selectedCards;
+        public List<Card> holdingZone;
         public List<Card> playedCards;
+        public int currentScore;
+        public ScoreController score;
 
         public GameBoard()
         {
             this.hand = new Hand();
             this.deck = new Deck();
-            this.handInt = new HandInterface();
-            this.selectedCards = new List<Card>();
             this.playedCards = new List<Card>();
+            this.score = new ScoreController();
+            this.currentScore = 0;
         }
 
-
-        public void DrawCard()
+        public void AddPlayedCard(Card card)
         {
-            Card card = this.deck.DrawCard();
-            this.hand.AddCard(card);
+            this.playedCards.Add(card);
         }
 
-        public void AddCardToDeck(Card card)
+        public void PlaySelectedCard()
         {
-            this.deck.AddCard(card);
+            Card card = hand.PlaySelectedCard();
+            this.playedCards.Add(card);
         }
 
-        public void AddCardToHand(Card card)
+        public void CalculateScore()
         {
-            this.hand.AddCard(card);
+            int CurrentScore = this.score.CalculateScore(this.playedCards);
+            this.currentScore = CurrentScore;
         }
 
-        public void SelectCardInHand(Card card)
-        {
-            this.selectedCards.Add(card);
-        }
-
-        public void PlaySelectedCards()
-        {
-            this.playedCards.AddRange(this.selectedCards);
-            this.selectedCards.Clear();
-        }
     }
 }

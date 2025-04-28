@@ -2,12 +2,12 @@
 {
     public class Card
     {
-        private int _value { get; set; }
-        private string _suit { get; set; }
+        public int _value { get; set; }
+        public string _suit { get; set; }
 
-        private Boolean _bust { get; set; }
+        public Boolean _bust { get; set; }
 
-        private List<string> _keywords { get; set; }
+        public List<string> _keywords { get; set; }
 
         public Card() { 
             _value = 0;

@@ -9,10 +9,5 @@ namespace PullYourLuck.Interfaces
             return HandCount;
         }
 
-        public void DrawCard(Hand hand, Deck deck)
-        {
-            Card card = deck.DrawCard();
-            hand.AddCard(card);
-        }
     }
 }
